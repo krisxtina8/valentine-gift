@@ -1,0 +1,94 @@
+body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(#f8b5b5, #f3dcdc);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Segoe UI", sans-serif;
+}
+
+/* COMMON BOX STYLE */
+.box {
+    background: white;
+    width: 380px;
+    padding: 25px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+}
+
+input {
+    width: 80%;
+    padding: 10px;
+    margin-top: 15px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    background: #ff5a8a;
+    color: white;
+}
+
+#hint {
+    color: red;
+    display: none;
+    margin-top: 10px;
+}
+
+/* HIDE OTHER PAGES */
+#letterPage,
+#photoPage {
+    display: none;
+}
+
+/* LETTER BOX */
+#letter {
+    text-align: left;
+    white-space: pre-wrap;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-top: 15px;
+    height: 260px;
+    overflow-y: auto;
+}
+
+/* POLAROID */
+.polaroid {
+    background: white;
+    padding: 10px;
+    width: 250px;
+    margin: 15px auto;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+.polaroid img {
+    width: 100%;
+    border-radius: 5px;
+}
+
+#nextBtn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+#readHint {
+    margin-top: 10px;
+    color: #888;
+    font-size: 13px;
+}
+
+#slide {
+    transition: opacity 0.8s ease-in-out;
+}
+#slide.fade-out {
+    opacity: 0;
+}   

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For You ❤️</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(#f8b5b5, #f3dcdc);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Segoe UI", sans-serif;
+}
+
+.box {
+    background: white;
+    width: 380px;
+    padding: 25px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+}
+
+input {
+    width: 80%;
+    padding: 10px;
+    margin-top: 15px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    background: #ff5a8a;
+    color: white;
+    opacity: 0.4;
+    pointer-events: none;
+    transition: opacity 0.6s ease;
+}
+
+button.enabled {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#hint {
+    color: red;
+    display: none;
+    margin-top: 10px;
+}
+
+#letterPage,
+#photoPage {
+    display: none;
+}
+
+#letter {
+    text-align: left;
+    white-space: pre-wrap;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-top: 15px;
+    height: 260px;
+    overflow-y: auto;
+}
+
+.polaroid {
+    background: white;
+    padding: 10px;
+    width: 250px;
+    margin: 15px auto;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+.polaroid img {
+    width: 100%;
+    border-radius: 5px;
+    transition: opacity 0.6s ease;
+}
+
+.caption {
+    font-family: "Comic Sans MS", cursive;
+}
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<div id="lockScreen" class="box">
+    <h2>💌 Enter Password</h2>
+    <input type="password" id="password" placeholder="Password">
+    <br>
+    <button class="enabled" onclick="unlock()">Unlock ❤️</button>
+    <div id="hint">Wrong password 😏</div>
+</div>
+
+<!-- PAGE 2 -->
+<div id="letterPage" class="box">
+    <h2>For You ❤️</h2>
+    <div id="letter"></div>
+    <p id="readHint">Reading...</p>
+    <button id="nextBtn" onclick="goToPhotos()">Next ➝</button>
+</div>
+
+<!-- PAGE 3 -->
+<div id="photoPage" class="box">
+    <h2>Us 💕</h2>
+
+    <div class="polaroid">
+        <img id="slide" src="image1.jpeg">
+        <p class="caption">Always us ❤️</p>
+    </div>
+
+    <audio id="music" loop>
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+</div>
+
+<script>
+const correctPassword = "cutiekris";
+
+const letterText = `My dearest levi muthe,
+
+
+Its our first valentine's day together!!! Last year namba rendu perum kalachitu irundhom.
+ valentine's ku enna gift vanthuchu nu hahaha. I just want to say how much you mean to me.
+ My best friend in this crazy journey of life.
+  Ithu avlo periya gift illanu theriyum (akka ku konjam budget issues), but next year namba maja panrom.
+   Unnaku ithula maybe cringe ah irunthalum, I want to keep this in your memory as a thing that nee ella special days layum you were loved by me nu. Apprm enna I wish namba neraya valentine's days onna celebrate pannuvom nu, maybe not this year but next year kandipa onna than irupom. Namba neraya memories onna vechirukom and i hope unnum neraya neraya memories craete pannuvom (main ah saapudrathu tha). Okay anyways Happy Valentine’s Day, en chellakutty. Mwahhhhhhhhhhhhhh
+
+Happy Valentine’s Day ❤️`;
+
+const password = document.getElementById("password");
+const lockScreen = document.getElementById("lockScreen");
+const letterPage = document.getElementById("letterPage");
+const photoPage = document.getElementById("photoPage");
+const letterBox = document.getElementById("letter");
+const hint = document.getElementById("hint");
+const nextBtn = document.getElementById("nextBtn");
+const readHint = document.getElementById("readHint");
+const music = document.getElementById("music");
+const slide = document.getElementById("slide");
+
+let i = 0;
+
+// PASSWORD
+function unlock() {
+    if (password.value === correctPassword) {
+        lockScreen.style.display = "none";
+        letterPage.style.display = "block";
+        typeLetter();
+    } else {
+        hint.style.display = "block";
+    }
+}
+
+// TYPING EFFECT
+function typeLetter() {
+    if (i < letterText.length) {
+        letterBox.innerHTML += letterText.charAt(i);
+        i++;
+        setTimeout(typeLetter, 35);
+    } else {
+        readHint.textContent = "💖";
+        nextBtn.classList.add("enabled");
+    }
+}
+
+// NEXT PAGE
+function goToPhotos() {
+    letterPage.style.display = "none";
+    photoPage.style.display = "block";
+    music.play();
+    startSlideshow();
+}
+
+// SLIDESHOW
+const photos = [
+    "image1.jpeg",
+    "image2.jpeg",
+    "image3.jpeg",
+    "image4.jpeg",
+    "image5.jpeg"
+];
+
+let index = 0;
+
+function startSlideshow() {
+    setInterval(() => {
+        slide.style.opacity = 0;
+
+        setTimeout(() => {
+            index = (index + 1) % photos.length;
+            slide.src = photos[index];
+            slide.style.opacity = 1;
+        }, 500);
+    }, 2500);
+}
+</script>
+
+</body>
+</html>
